@@ -1,0 +1,488 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CDIWebSiteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CategorySection">
+          <Key>
+            <PropertyRef Name="IdCategory" />
+          </Key>
+          <Property Name="IdCategory" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="CatDescription" Type="varchar" MaxLength="300" />
+          <Property Name="Active" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Evento">
+          <Key>
+            <PropertyRef Name="IdEvento" />
+          </Key>
+          <Property Name="IdEvento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Evento" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="300" />
+          <Property Name="ImgEvento" Type="varbinary(max)" />
+          <Property Name="Lugar" Type="varchar" MaxLength="100" />
+          <Property Name="Active" Type="int" />
+        </EntityType>
+        <EntityType Name="ImgSection">
+          <Key>
+            <PropertyRef Name="IdImg" />
+          </Key>
+          <Property Name="IdImg" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCategory" Type="int" Nullable="false" />
+          <Property Name="Img" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Active" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Inscriptions">
+          <Key>
+            <PropertyRef Name="IdIns" />
+          </Key>
+          <Property Name="IdIns" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPersona" Type="int" Nullable="false" />
+          <Property Name="IdEvento" Type="int" Nullable="false" />
+          <Property Name="Active" Type="int" />
+        </EntityType>
+        <EntityType Name="NetUsers">
+          <Key>
+            <PropertyRef Name="IdUser" />
+          </Key>
+          <Property Name="IdUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="PasswordHash" Type="varbinary(max)" />
+          <Property Name="Active" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="IdPersona" />
+          </Key>
+          <Property Name="IdPersona" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Apellido" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="Edad" Type="int" />
+          <Property Name="Gender" Type="char" MaxLength="1" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" />
+          <Property Name="FechaRegistro" Type="datetime" />
+          <Property Name="Active" Type="int" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="IdRequest" />
+          </Key>
+          <Property Name="IdRequest" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="50" />
+          <Property Name="Descripcion" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="VidSection">
+          <Key>
+            <PropertyRef Name="IdVideo" />
+          </Key>
+          <Property Name="IdVideo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCategory" Type="int" Nullable="false" />
+          <Property Name="iFrameVideo" Type="varchar(max)" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CitaBiblica" Type="varchar" MaxLength="150" />
+          <Property Name="Pastor" Type="varchar" MaxLength="100" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="300" />
+          <Property Name="Active" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_idCategory">
+          <End Role="CategorySection" Type="Self.CategorySection" Multiplicity="1" />
+          <End Role="ImgSection" Type="Self.ImgSection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategorySection">
+              <PropertyRef Name="IdCategory" />
+            </Principal>
+            <Dependent Role="ImgSection">
+              <PropertyRef Name="IdCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_IdCatVid">
+          <End Role="CategorySection" Type="Self.CategorySection" Multiplicity="1" />
+          <End Role="VidSection" Type="Self.VidSection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategorySection">
+              <PropertyRef Name="IdCategory" />
+            </Principal>
+            <Dependent Role="VidSection">
+              <PropertyRef Name="IdCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_IdEvento">
+          <End Role="Evento" Type="Self.Evento" Multiplicity="1" />
+          <End Role="Inscriptions" Type="Self.Inscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evento">
+              <PropertyRef Name="IdEvento" />
+            </Principal>
+            <Dependent Role="Inscriptions">
+              <PropertyRef Name="IdEvento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_IdPersona">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="Inscriptions" Type="Self.Inscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="IdPersona" />
+            </Principal>
+            <Dependent Role="Inscriptions">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="FnPager" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pagina" Type="int" Mode="In" />
+          <Parameter Name="cantRegistros" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Title" Type="varchar" MaxLength="100" />
+                <Property Name="Pastor" Type="varchar" MaxLength="100" />
+                <Property Name="Descripcion" Type="varchar" MaxLength="300" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <EntityContainer Name="CDIWebSiteModelStoreContainer">
+          <EntitySet Name="CategorySection" EntityType="Self.CategorySection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Evento" EntityType="Self.Evento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ImgSection" EntityType="Self.ImgSection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inscriptions" EntityType="Self.Inscriptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NetUsers" EntityType="Self.NetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Request" EntityType="Self.Request" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VidSection" EntityType="Self.VidSection" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_idCategory" Association="Self.fk_idCategory">
+            <End Role="CategorySection" EntitySet="CategorySection" />
+            <End Role="ImgSection" EntitySet="ImgSection" />
+          </AssociationSet>
+          <AssociationSet Name="fk_IdCatVid" Association="Self.fk_IdCatVid">
+            <End Role="CategorySection" EntitySet="CategorySection" />
+            <End Role="VidSection" EntitySet="VidSection" />
+          </AssociationSet>
+          <AssociationSet Name="fk_IdEvento" Association="Self.fk_IdEvento">
+            <End Role="Evento" EntitySet="Evento" />
+            <End Role="Inscriptions" EntitySet="Inscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_IdPersona" Association="Self.fk_IdPersona">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Inscriptions" EntitySet="Inscriptions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CDIWebSiteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="FnPager_Result">
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Pastor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+        </ComplexType>
+        <EntityType Name="CategorySection">
+          <Key>
+            <PropertyRef Name="IdCategory" />
+          </Key>
+          <Property Name="IdCategory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CatDescription" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ImgSection" Relationship="Self.fk_idCategory" FromRole="CategorySection" ToRole="ImgSection" />
+          <NavigationProperty Name="VidSection" Relationship="CDIWebSiteModel.fk_IdCatVid" FromRole="CategorySection" ToRole="VidSection" />
+        </EntityType>
+        <EntityType Name="Evento">
+          <Key>
+            <PropertyRef Name="IdEvento" />
+          </Key>
+          <Property Name="IdEvento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Evento1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="ImgEvento" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Lugar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Int32" />
+          <NavigationProperty Name="Inscriptions" Relationship="Self.fk_IdEvento" FromRole="Evento" ToRole="Inscriptions" />
+        </EntityType>
+        <EntityType Name="ImgSection">
+          <Key>
+            <PropertyRef Name="IdImg" />
+          </Key>
+          <Property Name="IdImg" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCategory" Type="Int32" Nullable="false" />
+          <Property Name="Img" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Active" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CategorySection" Relationship="Self.fk_idCategory" FromRole="ImgSection" ToRole="CategorySection" />
+        </EntityType>
+        <EntityType Name="Inscriptions">
+          <Key>
+            <PropertyRef Name="IdIns" />
+          </Key>
+          <Property Name="IdIns" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPersona" Type="Int32" Nullable="false" />
+          <Property Name="IdEvento" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Int32" />
+          <NavigationProperty Name="Evento" Relationship="Self.fk_IdEvento" FromRole="Inscriptions" ToRole="Evento" />
+          <NavigationProperty Name="Persona" Relationship="Self.fk_IdPersona" FromRole="Inscriptions" ToRole="Persona" />
+        </EntityType>
+        <EntityType Name="NetUsers">
+          <Key>
+            <PropertyRef Name="IdUser" />
+          </Key>
+          <Property Name="IdUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PasswordHash" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Active" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="IdPersona" />
+          </Key>
+          <Property Name="IdPersona" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellido" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Edad" Type="Int32" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+          <Property Name="Active" Type="Int32" />
+          <NavigationProperty Name="Inscriptions" Relationship="Self.fk_IdPersona" FromRole="Persona" ToRole="Inscriptions" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="IdRequest" />
+          </Key>
+          <Property Name="IdRequest" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="fk_idCategory">
+          <End Role="CategorySection" Type="Self.CategorySection" Multiplicity="1" />
+          <End Role="ImgSection" Type="Self.ImgSection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategorySection">
+              <PropertyRef Name="IdCategory" />
+            </Principal>
+            <Dependent Role="ImgSection">
+              <PropertyRef Name="IdCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_IdEvento">
+          <End Role="Evento" Type="Self.Evento" Multiplicity="1" />
+          <End Role="Inscriptions" Type="Self.Inscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evento">
+              <PropertyRef Name="IdEvento" />
+            </Principal>
+            <Dependent Role="Inscriptions">
+              <PropertyRef Name="IdEvento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_IdPersona">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="Inscriptions" Type="Self.Inscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="IdPersona" />
+            </Principal>
+            <Dependent Role="Inscriptions">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CDIWebSiteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CategorySection" EntityType="Self.CategorySection" />
+          <EntitySet Name="Evento" EntityType="Self.Evento" />
+          <EntitySet Name="ImgSection" EntityType="Self.ImgSection" />
+          <EntitySet Name="Inscriptions" EntityType="Self.Inscriptions" />
+          <EntitySet Name="NetUsers" EntityType="Self.NetUsers" />
+          <EntitySet Name="Persona" EntityType="Self.Persona" />
+          <EntitySet Name="Request" EntityType="Self.Request" />
+          <AssociationSet Name="fk_idCategory" Association="Self.fk_idCategory">
+            <End Role="CategorySection" EntitySet="CategorySection" />
+            <End Role="ImgSection" EntitySet="ImgSection" />
+          </AssociationSet>
+          <AssociationSet Name="fk_IdEvento" Association="Self.fk_IdEvento">
+            <End Role="Evento" EntitySet="Evento" />
+            <End Role="Inscriptions" EntitySet="Inscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_IdPersona" Association="Self.fk_IdPersona">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Inscriptions" EntitySet="Inscriptions" />
+          </AssociationSet>
+          <FunctionImport Name="FnPager" IsComposable="true" ReturnType="Collection(CDIWebSiteModel.FnPager_Result)">
+            <Parameter Name="pagina" Mode="In" Type="Int32" />
+            <Parameter Name="cantRegistros" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="VidSection" EntityType="CDIWebSiteModel.VidSection" />
+          <AssociationSet Name="fk_IdCatVid" Association="CDIWebSiteModel.fk_IdCatVid">
+            <End Role="CategorySection" EntitySet="CategorySection" />
+            <End Role="VidSection" EntitySet="VidSection" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="VidSection">
+          <Key>
+            <PropertyRef Name="IdVideo" />
+          </Key>
+          <Property Name="IdVideo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCategory" Type="Int32" Nullable="false" />
+          <Property Name="iFrameVideo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Titulo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CitaBiblica" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Pastor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CategorySection" Relationship="CDIWebSiteModel.fk_IdCatVid" FromRole="VidSection" ToRole="CategorySection" />
+        </EntityType>
+        <Association Name="fk_IdCatVid">
+          <End Type="CDIWebSiteModel.CategorySection" Role="CategorySection" Multiplicity="1" />
+          <End Type="CDIWebSiteModel.VidSection" Role="VidSection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategorySection">
+              <PropertyRef Name="IdCategory" />
+            </Principal>
+            <Dependent Role="VidSection">
+              <PropertyRef Name="IdCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CDIWebSiteModelStoreContainer" CdmEntityContainer="CDIWebSiteEntities">
+          <EntitySetMapping Name="CategorySection">
+            <EntityTypeMapping TypeName="CDIWebSiteModel.CategorySection">
+              <MappingFragment StoreEntitySet="CategorySection">
+                <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="CatDescription" ColumnName="CatDescription" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Evento">
+            <EntityTypeMapping TypeName="CDIWebSiteModel.Evento">
+              <MappingFragment StoreEntitySet="Evento">
+                <ScalarProperty Name="IdEvento" ColumnName="IdEvento" />
+                <ScalarProperty Name="Evento1" ColumnName="Evento" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ImgEvento" ColumnName="ImgEvento" />
+                <ScalarProperty Name="Lugar" ColumnName="Lugar" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ImgSection">
+            <EntityTypeMapping TypeName="CDIWebSiteModel.ImgSection">
+              <MappingFragment StoreEntitySet="ImgSection">
+                <ScalarProperty Name="IdImg" ColumnName="IdImg" />
+                <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
+                <ScalarProperty Name="Img" ColumnName="Img" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inscriptions">
+            <EntityTypeMapping TypeName="CDIWebSiteModel.Inscriptions">
+              <MappingFragment StoreEntitySet="Inscriptions">
+                <ScalarProperty Name="IdIns" ColumnName="IdIns" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="IdEvento" ColumnName="IdEvento" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NetUsers">
+            <EntityTypeMapping TypeName="CDIWebSiteModel.NetUsers">
+              <MappingFragment StoreEntitySet="NetUsers">
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Persona">
+            <EntityTypeMapping TypeName="CDIWebSiteModel.Persona">
+              <MappingFragment StoreEntitySet="Persona">
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Edad" ColumnName="Edad" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Request">
+            <EntityTypeMapping TypeName="CDIWebSiteModel.Request">
+              <MappingFragment StoreEntitySet="Request">
+                <ScalarProperty Name="IdRequest" ColumnName="IdRequest" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionName="CDIWebSiteModel.Store.FnPager" FunctionImportName="FnPager">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CDIWebSiteModel.FnPager_Result">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Pastor" ColumnName="Pastor" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="VidSection">
+            <EntityTypeMapping TypeName="CDIWebSiteModel.VidSection">
+              <MappingFragment StoreEntitySet="VidSection">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Pastor" ColumnName="Pastor" />
+                <ScalarProperty Name="CitaBiblica" ColumnName="CitaBiblica" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="iFrameVideo" ColumnName="iFrameVideo" />
+                <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
+                <ScalarProperty Name="IdVideo" ColumnName="IdVideo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
