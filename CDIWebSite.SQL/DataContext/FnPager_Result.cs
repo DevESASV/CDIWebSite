@@ -13,8 +13,11 @@ namespace CDIWebSite.SQL.DataContext
     
     public partial class FnPager_Result
     {
+        public Nullable<int> IdVideo { get; set; }
+        public Nullable<int> IdCategory { get; set; }
         public string Title { get; set; }
         public string Pastor { get; set; }
         public string Descripcion { get; set; }
+        public string iFrame { get; set; }
     }
 }

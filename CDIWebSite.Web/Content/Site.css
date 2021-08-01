@@ -22,3 +22,560 @@ select,
 textarea {
     max-width: 280px;
 }
+
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: rgb(0, 0, 0);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+    .navbar img.desktop-logo {
+        width: 25%;
+    }
+
+    .navbar img.mobil-logo {
+        display: none;
+    }
+
+.socialfloat {
+    position: fixed;
+    left: 0;
+    top: 200px;
+    z-index: 2000;
+    font-size: 1rem;
+}
+
+    .socialfloat ul {
+        list-style: none;
+    }
+
+        .socialfloat ul li a {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+        }
+
+            .socialfloat ul li a.faceboook {
+                padding: 1.2rem;
+            }
+
+            /*.socialfloat ul li a.Wha {
+    padding: 1.25rem;
+}*/
+
+            .socialfloat ul li a.Maail {
+                padding: 1.2rem;
+            }
+
+            .socialfloat ul li a.ubi {
+                padding: 1.3rem;
+            }
+
+            .socialfloat ul li a.casita {
+                padding: 1.12rem;
+            }
+
+            .socialfloat ul li a.yutu {
+                padding: 1.12rem;
+            }
+
+        .socialfloat ul li a {
+            background: rgba(0, 0, 0, 0.933);
+            -webkit-transition: all 500ms ease;
+            -o-transition: all 500ms ease;
+            transition: all 500ms ease;
+        }
+
+            .socialfloat ul li a.faceboook:hover {
+                background: rgba(5, 113, 230, 0.733);
+                padding: 2rem;
+            }
+
+            /*.socialfloat ul li a.Wha:hover {
+    background: rgba(46, 224, 46, 0.733);
+    padding: 2rem;
+}*/
+
+            .socialfloat ul li a.Maail:hover {
+                background: rgba(216, 54, 25, 0.733);
+                padding: 2rem;
+            }
+
+            .socialfloat ul li a.casita:hover {
+                background: rgba(216, 165, 25, 0.733);
+                padding: 2rem;
+            }
+
+            .socialfloat ul li a.ubi:hover {
+                background: rgba(211, 228, 219, 0.733);
+                padding: 2rem;
+            }
+
+            .socialfloat ul li a.yutu:hover {
+                background: rgba(255, 0, 0, 0.733);
+                padding: 2rem;
+            }
+
+            .socialfloat ul li a.Wha:hover {
+                background: rgba(46, 224, 46, 0.733);
+                padding: 2rem;
+            }
+
+            .socialfloat ul li a.Wha {
+                padding: 1.25rem;
+            }
+
+
+.contenedor-index {
+    padding: 1.5rem;
+}
+
+body {
+    font-family: 'Merriweather Sans', sans-serif;
+}
+
+footer {
+    background: rgba(0, 0, 0, 0.933);
+    color: #FBE05E;
+}
+
+    footer a {
+        color: #FBE05E;
+    }
+
+b.titulo-iglesia {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 2.5rem;
+    line-height: 1px;
+    margin-top: 2rem;
+    padding-top: 2rem;
+}
+
+b.subtitlenav {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 1.2rem;
+}
+
+b.nav-bar-link {
+    color: #b2bec3;
+    text-align: right;
+}
+
+div.collapse ul {
+    text-align: right
+}
+
+.col-md-2 a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.siguenos {
+    display: none;
+}
+
+.carousel-inner {
+    width: 90%;
+    padding-top: 3rem;
+}
+
+.caards {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+    .caards .caard {
+        display: flex;
+        width: 46%;
+        height: 300px;
+        text-align: justify;
+        align-items: center;
+        justify-content: space-evenly;
+        border-radius: 5px;
+        box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.6);
+    }
+
+        .caards .caard > .contenido-texto-caard {
+            width: 80%;
+            color: black;
+        }
+
+            .caards .caard > .contenido-texto-caard h3 {
+                font-family: 'Dancing Script', cursive;
+            }
+
+.autocardcontainer > h1 {
+    font-family: 'Dancing Script', cursive;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 20px;
+}
+
+.autocard {
+    border-radius: 10px;
+    width: 95%;
+    font-size: 12px;
+    margin: auto;
+}
+
+
+div.contenido-textos p {
+    width: 100%;
+    font-size: 1.2rem;
+}
+
+span {
+    display: flex;
+    justify-content: center;
+}
+
+.Fotopastor {
+    width: 25%;
+    margin: 10px;
+    border-radius: 100%;
+}
+
+#buttonShow {
+    box-shadow: 0px 10px 14px -7px #276873;
+    background: linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+    background-color: #599bb3;
+    border-radius: 8px;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 13px 32px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #3d768a;
+    margin: 20px;
+}
+
+    #buttonShow:hover {
+        background: linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+        background-color: #408c99;
+    }
+
+    #buttonShow:active {
+        position: relative;
+        top: 1px;
+    }
+
+.contenido-textos {
+    text-align: center;
+}
+
+.caards .caard > .contenido-texto-caard p {
+    font-weight: 500;
+    padding-top: 5px;
+}
+
+/* Galeria */
+
+div.contenedor {
+    background: #f2f2f2;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.galeria-port {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.imagen-port {
+    width: 29%;
+    margin-bottom: 10px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, .5);
+}
+
+.hover-galeria p b {
+    font-family: 'Dancing Script', cursive;
+}
+
+.imagen-port > a.thickbox > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.imagen-port > a.thickbox > video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.hover-galeria {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    transform: scale(0);
+    background: hsla(0, 0%, 27%, 0.7);
+    transition: transform .5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+    .hover-galeria img {
+        width: 50px;
+    }
+
+    .hover-galeria video {
+        width: 50px;
+    }
+
+    .hover-galeria p {
+        color: #fff;
+        text-align: center;
+        font-size: 2.5rem;
+        font-family: 'Dancing Script', cursive;
+    }
+
+.imagen-port:hover .hover-galeria {
+    transform: scale(1);
+}
+
+h1.titulo {
+    text-align: center;
+    padding: 1.8rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 700;
+}
+
+.contenedor-sobre-nosotros {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.sobre-nosotros .contenido-textos {
+    width: 87%;
+}
+
+.contenido-textos p b {
+    background: #00334e;
+    color: white;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 6px rgba(0, 0, 0, .5);
+    width: 35px;
+    height: 35px;
+}
+
+.tvideo iframe {
+    margin: auto;
+}
+
+.contenido-textos p {
+    padding: 2rem;
+    font-size: x-large;
+    text-align: justify;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+
+
+@media screen and (max-width:700px) {
+    .socialfloat {
+        display: none;
+    }
+
+    .navbar img.mobil-logo {
+        display: initial;
+        width: 80%;
+    }
+
+    div.collapse ul li a {
+        text-align: left;
+    }
+
+
+    .navbar {
+        display: flex;
+        display: inline-flex;
+    }
+
+    header nav {
+        width: 100%;
+    }
+
+    .navbar img.desktop-logo {
+        display: none;
+    }
+
+    .siguenos {
+        display: contents;
+    }
+
+    .imagen-port {
+        width: 100%;
+        margin-bottom: 10px;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+        box-shadow: 0 0 6px 0 rgba(0, 0, 0, .5);
+    }
+
+    .sobre-nosotros .contenido-textos {
+        width: 95%;
+    }
+}
+
+@media screen and (max-width:900px) {
+    .Fotopastor {
+        width: 100%;
+        margin: 10px;
+        border-radius: 100%;
+    }
+
+    .caards {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .caards .caard {
+            width: 90%;
+        }
+
+            .caards .caard:first-child {
+                margin-bottom: 30px;
+            }
+
+        .caards .caard {
+            height: 0%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+            .caards .caard .contenido-texto-caard {
+                padding: 0;
+                width: 90%;
+                height: 70%;
+            }
+}
+/*Cards*/
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+}
+
+.container-card {
+    width: auto;
+    display: flex;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.title-cards {
+    width: 100%;
+    max-width: 1080px;
+    margin: auto;
+    padding: 20px;
+    margin-top: 50px;
+    text-align: center;
+    color: #7a7a7a;
+}
+
+div.card {
+    width: 60%;
+    margin: auto;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+    transition: all 400ms ease-out;
+    cursor: default;
+}
+
+.card:hover {
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
+    transform: translateY(-3%);
+}
+
+.card img {
+    width: 100%;
+    height: 270px;
+}
+
+.card .contenido-card {
+    padding: 15px;
+    text-align: center;
+}
+
+    .card .contenido-card h3 {
+        margin-bottom: 15px;
+        color: #7a7a7a;
+    }
+
+    .card .contenido-card p {
+        line-height: 1.8;
+        color: #6a6a6a;
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .card .contenido-card a {
+        display: inline-block;
+        padding: 10px;
+        margin-top: 30px;
+        text-decoration: none;
+        color: #2fb4cc;
+        border: 1px solid #2fb4cc;
+        border-radius: 4px;
+        transition: all 400ms ease;
+        margin-bottom: 5px;
+    }
+
+        .card .contenido-card a:hover {
+            background: #2fb4cc;
+            color: #fff;
+        }
+
+@media only screen and (min-width: 320px) and (max-width: 768px) {
+    .container-card {
+        flex-wrap: wrap-reverse;
+    }
+
+    .card {
+        margin: initial;
+    }
+}
+/*Fin-Cards*/
+
+.autocards {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+/* On mouse-over, add a deeper shadow */
+.autocard {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Add some padding inside the card container */
+.autocardcontainer {
+    padding: 2px 16px;
+}

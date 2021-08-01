@@ -143,9 +143,12 @@
           <ReturnType>
             <CollectionType>
               <RowType>
+                <Property Name="IdVideo" Type="int" />
+                <Property Name="IdCategory" Type="int" />
                 <Property Name="Title" Type="varchar" MaxLength="100" />
                 <Property Name="Pastor" Type="varchar" MaxLength="100" />
                 <Property Name="Descripcion" Type="varchar" MaxLength="300" />
+                <Property Name="iFrame" Type="varchar(max)" />
               </RowType>
             </CollectionType>
           </ReturnType>
@@ -180,11 +183,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CDIWebSiteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <ComplexType Name="FnPager_Result">
-          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Pastor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-        </ComplexType>
         <EntityType Name="CategorySection">
           <Key>
             <PropertyRef Name="IdCategory" />
@@ -319,15 +317,15 @@
             <End Role="Persona" EntitySet="Persona" />
             <End Role="Inscriptions" EntitySet="Inscriptions" />
           </AssociationSet>
-          <FunctionImport Name="FnPager" IsComposable="true" ReturnType="Collection(CDIWebSiteModel.FnPager_Result)">
-            <Parameter Name="pagina" Mode="In" Type="Int32" />
-            <Parameter Name="cantRegistros" Mode="In" Type="Int32" />
-          </FunctionImport>
           <EntitySet Name="VidSection" EntityType="CDIWebSiteModel.VidSection" />
           <AssociationSet Name="fk_IdCatVid" Association="CDIWebSiteModel.fk_IdCatVid">
             <End Role="CategorySection" EntitySet="CategorySection" />
             <End Role="VidSection" EntitySet="VidSection" />
           </AssociationSet>
+          <FunctionImport Name="FnPager" IsComposable="true" ReturnType="Collection(CDIWebSiteModel.FnPager_Result)">
+            <Parameter Name="pagina" Mode="In" Type="Int32" />
+            <Parameter Name="cantRegistros" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="VidSection">
           <Key>
@@ -355,6 +353,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="FnPager_Result">
+          <Property Type="Int32" Name="IdVideo" Nullable="true" />
+          <Property Type="Int32" Name="IdCategory" Nullable="true" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Pastor" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="iFrame" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -439,15 +445,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionName="CDIWebSiteModel.Store.FnPager" FunctionImportName="FnPager">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="CDIWebSiteModel.FnPager_Result">
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Pastor" ColumnName="Pastor" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="VidSection">
             <EntityTypeMapping TypeName="CDIWebSiteModel.VidSection">
               <MappingFragment StoreEntitySet="VidSection">
@@ -462,6 +459,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="FnPager" FunctionName="CDIWebSiteModel.Store.FnPager">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CDIWebSiteModel.FnPager_Result">
+                <ScalarProperty Name="IdVideo" ColumnName="IdVideo" />
+                <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Pastor" ColumnName="Pastor" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="iFrame" ColumnName="iFrame" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
