@@ -4,15 +4,18 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace CDIWebSite.Web.Models
 {
     public class VidSectionVM : BaseModel
     {
         public int Id { get; set; }
+        [DisplayName("Categoria")]
         [Required(ErrorMessage = "Es necesario definir una categoria para el video!")]
         public int IdCategory { get; set; }
         [Required(ErrorMessage = "Este campo no puede estar vacio!")]
+        [AllowHtml]
         public string iFrame { get; set; }
         [Required(ErrorMessage = "Este campo no puede estar vacio!")]
         [MaxLength(100, ErrorMessage = "El Titulo no puede superar los 100 caracteres!")]

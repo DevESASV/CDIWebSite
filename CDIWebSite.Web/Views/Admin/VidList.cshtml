@@ -4,7 +4,47 @@
     ViewBag.Title = "VidList";
 }
 
-<div class="containertemplate-ph">
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3 col-md-3 col-lg-3">
+            <a href="" class="btn btn-success">Agregar Video</a>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <table class="table table-hover table-striped">
+            <tr>
+                <th>Titulo</th>
+                <th>Pastor</th>
+                <th>Descripcion</th>
+                <th></th>
+            </tr>
+            @if (Model.Lst != null)
+            {
+                foreach (var item in Model.Lst)
+                {
+                    <tr id="tr_@item.Id">
+                        <td>@item.Title</td>
+                        <td>@item.Pastor</td>
+                        <td>@item.Description</td>
+                        <td>
+                            <a href="#" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                            <button class="btn btn-info btnDetails" data-codigo="@item.Id" data-target="#staticBackdrop"><i class="fas fa-info"></i></button>
+                            <button class="btn btn-danger btnEliminar" data-codigo="@item.Id"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+<!--<div class="containertemplate-ph">
     <div class="tm-page-wrap mx-auto">
         <div class="position-relative">
             <div class="tm-welcome-container text-center text-white">
@@ -17,9 +57,9 @@
                 </div>
             </div>
 
-            <div id="tm-video-container">
+            <div id="tm-video-container">-->
                 @*<img src="~/Content/img/Captura de pantalla 2020-09-26 113634.png" />*@
-                <video autoplay muted loop id="tm-video">
+                <!--<video autoplay muted loop id="tm-video">
                     <source src="video/wheat-field.mp4" type="video/mp4">
                 </video>
             </div>
@@ -29,20 +69,20 @@
             <div id="content" class="mx-auto tm-content-container">
                 <main>
                     <div class="row tm-catalog-item-list">
-                        @foreach (var mod in Model.Lst)
+                        foreach (var mod in Model.Lst)
                         {
                             <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
                                 <div class="position-relative tm-thumbnail-container">
-                                    @Html.Raw(mod.iFrame)
-                                    <a href="/Home/VideoStream?id=@mod.Id" class="position-absolute tm-img-overlay">
+                                    Html.Raw(mod.iFrame)
+                                    <a href="/Home/VideoStream?id=mod.Id" class="position-absolute tm-img-overlay">
                                         <i class="fas fa-play tm-overlay-icon"></i>
                                     </a>
                                 </div>
                                 <div class="p-4 tm-bg-gray tm-catalog-item-description">
-                                    <h3 class="tm-text-primary mb-3 tm-catalog-item-title">@mod.Title</h3>
-                                    <p class="tm-catalog-item-text">
+                                    <h3 class="tm-text-primary mb-3 tm-catalog-item-title">mod.Title</h3>
+                                    <p class="tm-catalog-item-text">-->
                                         @*<span class="tm-text-secondary">do not need</span> any JS.*@
-                                        @mod.Description
+                                        <!--mod.Description
                                     </p>
                                 </div>
                             </div>
@@ -53,7 +93,7 @@
                     <div class="col-sm-4 col-lg-4 col-md-4"></div>
                     <div class="col-sm-4 col-lg-4 col-md-4"></div>
                     <div class="col-sm-4 col-lg-4 col-md-4">
-                        @{Html.RenderPartial("_paginator", Model); }
+                        {Html.RenderPartial("_paginator", Model); }
                     </div>
                 </div>
             </div>
@@ -115,4 +155,4 @@
                 }
             });
         })
-</script>
+</script>-->

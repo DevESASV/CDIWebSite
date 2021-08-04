@@ -132,6 +132,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\CategoryVM.cs" />
     <Compile Include="Models\VidSectionVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services.Calls\VideoServices.cs" />
@@ -208,6 +209,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Admin\VidList.cshtml" />
     <Content Include="Views\Shared\_paginator.cshtml" />
+    <Content Include="Views\Admin\NewVideo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

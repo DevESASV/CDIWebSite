@@ -17,11 +17,31 @@ namespace CDIWebSite.Web.Controllers
             return View();
         }
 
-        public ActionResult VidList(int? page) 
+        public ActionResult VidList(int? page, string a) 
         {
+            ViewBag.Action = a;
             page = page == null ? 0 : page;
             VidSectionVM model = _VideoSectionServices.ListaVideos((int)page);
             return View(model);
+        }
+
+        public ActionResult NewVideo()
+        {
+            List<SelectListItem> LstCategories = _VideoSectionServices.GetCategories();
+            ViewBag.CategoryLst = LstCategories;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult NewVideo(VidSectionVM model)
+        {
+            string message = "EL video se agrego con exito!";
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            _VideoSectionServices.AgregarVideo(model);
+            return RedirectToAction("VidList", "Admin", new { a = message});
         }
     }
 }
