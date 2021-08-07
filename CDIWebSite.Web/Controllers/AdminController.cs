@@ -25,6 +25,34 @@ namespace CDIWebSite.Web.Controllers
             return View(model);
         }
 
+        public ActionResult EditVideo (int id)
+        {
+            VidSectionVM model = _VideoSectionServices.GetVideo(id);
+            List<SelectListItem> LstCategories = _VideoSectionServices.GetCategories();
+            ViewBag.CategoryLst = LstCategories;
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditVideo(VidSectionVM model)
+        {
+            string message;
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            if (_VideoSectionServices.EditarVideo(model))
+            {
+                message = "El Video se editó con exito!";
+                return RedirectToAction("VidList", "Admin", new { a = message });
+            }
+            else
+            {
+                message = "Parece que algo salió mal al editar el video, por favor intentelo nuevamente!";
+                return RedirectToAction("VidList", "Admin", new { a = message });
+            }
+        }
+
         public ActionResult NewVideo()
         {
             List<SelectListItem> LstCategories = _VideoSectionServices.GetCategories();
@@ -35,13 +63,21 @@ namespace CDIWebSite.Web.Controllers
         [HttpPost]
         public ActionResult NewVideo(VidSectionVM model)
         {
-            string message = "EL video se agrego con exito!";
+            string message;
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            _VideoSectionServices.AgregarVideo(model);
-            return RedirectToAction("VidList", "Admin", new { a = message});
+            if (_VideoSectionServices.AgregarVideo(model))
+            {
+                message = "EL video se agrego con exito!";
+                return RedirectToAction("VidList", "Admin", new { a = message });
+            }
+            else
+            {
+                message = "Parece que algo salio mal, por favor intente nuevamente!";
+                return RedirectToAction("VidList", "Admin", new { a = message });
+            }
         }
     }
 }

@@ -74,6 +74,9 @@
     <Compile Include="DataContext\FnPager_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataContext\ImageCategory.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataContext\ImgSection.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
@@ -81,6 +84,9 @@
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="DataContext\NetUsers.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\PageSection.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="DataContext\Persona.cs">

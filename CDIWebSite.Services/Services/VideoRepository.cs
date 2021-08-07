@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CDIWebSite.SQL.DataContext;
 using System.Data.Entity;
+using System.Diagnostics;
 
 namespace CDIWebSite.Services.Services
 {
@@ -44,10 +45,28 @@ namespace CDIWebSite.Services.Services
                     Exito = true;
                 }catch(Exception e)
                 {
+                    Debug.WriteLine("<<< catch : " + e.Message);
                     Exito = false;
                 }
 
                 return Exito;
+            }
+        }
+
+        public VidSection GetVideoById(int id)
+        {
+            VidSection obj = new VidSection();
+            using(var db = new CDIWebSiteEntities())
+            {
+                try
+                {
+                    obj = db.VidSection.Where(x => x.IdVideo == id).Single();
+                }catch(Exception e)
+                {
+                    Debug.WriteLine("<<< catch : " + e.Message);
+                }
+
+                return obj;
             }
         }
 
@@ -63,6 +82,7 @@ namespace CDIWebSite.Services.Services
                     Exito = true;
                 }catch(Exception e)
                 {
+                    Debug.WriteLine("<<< catch : " + e.Message);
                     Exito = false;
                 }
 
@@ -86,6 +106,7 @@ namespace CDIWebSite.Services.Services
                 }
                 catch(Exception e)
                 {
+                    Debug.WriteLine("<<< catch : " + e.Message);
                     Exito = false;
                 }
 

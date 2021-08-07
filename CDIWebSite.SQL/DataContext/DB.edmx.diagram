@@ -17,6 +17,9 @@
         <AssociationConnector Association="CDIWebSiteModel.fk_IdPersona" ManuallyRouted="false" />
         <EntityTypeShape EntityType="CDIWebSiteModel.VidSection" Width="1.5" PointX="5.5" PointY="7.875" />
         <AssociationConnector Association="CDIWebSiteModel.fk_IdCatVid" />
+        <EntityTypeShape EntityType="CDIWebSiteModel.ImageCategory" Width="1.5" PointX="10.125" PointY="4.25" />
+        <EntityTypeShape EntityType="CDIWebSiteModel.PageSection" Width="1.5" PointX="7.5" PointY="4.25" />
+        <AssociationConnector Association="CDIWebSiteModel.fk_idCategoryS" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

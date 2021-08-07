@@ -35,6 +35,8 @@ namespace CDIWebSite.SQL.DataContext
         public virtual DbSet<Persona> Persona { get; set; }
         public virtual DbSet<Request> Request { get; set; }
         public virtual DbSet<VidSection> VidSection { get; set; }
+        public virtual DbSet<ImageCategory> ImageCategory { get; set; }
+        public virtual DbSet<PageSection> PageSection { get; set; }
     
         [DbFunction("CDIWebSiteEntities", "FnPager")]
         public virtual IQueryable<FnPager_Result> FnPager(Nullable<int> pagina, Nullable<int> cantRegistros)

@@ -31,6 +31,25 @@ namespace CDIWebSite.Web.Services.Calls
             return Exito;
         }
 
+        public bool EditarVideo(VidSectionVM model)
+        {
+            bool Exito;
+            VidSection obj = new VidSection
+            {
+                IdVideo = model.Id,
+                IdCategory = model.IdCategory,
+                iFrameVideo = model.iFrame,
+                Titulo = model.Title,
+                CitaBiblica = model.Cita,
+                Pastor = model.Pastor,
+                Descripcion = model.Description
+            };
+
+            Exito = _manejoVideoRepository.EditVids(obj);
+
+            return Exito;
+        }
+
         public List<SelectListItem> GetCategories()
         {
             var Lst = _manejoCategoryRepository.GetCategories();
@@ -68,5 +87,23 @@ namespace CDIWebSite.Web.Services.Calls
             model.Page = page;
             return model;
         }
+
+        public VidSectionVM GetVideo(int id)
+        {
+            VidSection obj = _manejoVideoRepository.GetVideoById(id);
+            VidSectionVM model = new VidSectionVM
+            {
+                Title = obj.Titulo,
+                Pastor = obj.Pastor,
+                Cita = obj.CitaBiblica,
+                iFrame = obj.iFrameVideo,
+                IdCategory = obj.IdCategory,
+                Description = obj.Descripcion
+            };
+
+            return model;
+        }
+
+
     }
 }

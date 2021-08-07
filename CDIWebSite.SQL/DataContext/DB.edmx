@@ -25,6 +25,15 @@
           <Property Name="Lugar" Type="varchar" MaxLength="100" />
           <Property Name="Active" Type="int" />
         </EntityType>
+        <EntityType Name="ImageCategory">
+          <Key>
+            <PropertyRef Name="idCategory" />
+          </Key>
+          <Property Name="idCategory" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CatName" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="CatDesc" Type="varchar" MaxLength="300" />
+          <Property Name="Active" Type="int" />
+        </EntityType>
         <EntityType Name="ImgSection">
           <Key>
             <PropertyRef Name="IdImg" />
@@ -51,6 +60,16 @@
           <Property Name="UserName" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="PasswordHash" Type="varbinary(max)" />
           <Property Name="Active" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PageSection">
+          <Key>
+            <PropertyRef Name="idPS" />
+          </Key>
+          <Property Name="idPS" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCategory" Type="int" Nullable="false" />
+          <Property Name="imgSource" Type="varbinary(max)" Nullable="false" />
+          <Property Name="footerImg" Type="varchar" MaxLength="300" />
+          <Property Name="Active" Type="int" />
         </EntityType>
         <EntityType Name="Persona">
           <Key>
@@ -98,6 +117,18 @@
             </Principal>
             <Dependent Role="ImgSection">
               <PropertyRef Name="IdCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_idCategoryS">
+          <End Role="ImageCategory" Type="Self.ImageCategory" Multiplicity="1" />
+          <End Role="PageSection" Type="Self.PageSection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ImageCategory">
+              <PropertyRef Name="idCategory" />
+            </Principal>
+            <Dependent Role="PageSection">
+              <PropertyRef Name="idCategory" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -156,15 +187,21 @@
         <EntityContainer Name="CDIWebSiteModelStoreContainer">
           <EntitySet Name="CategorySection" EntityType="Self.CategorySection" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Evento" EntityType="Self.Evento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ImageCategory" EntityType="Self.ImageCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ImgSection" EntityType="Self.ImgSection" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inscriptions" EntityType="Self.Inscriptions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NetUsers" EntityType="Self.NetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PageSection" EntityType="Self.PageSection" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Request" EntityType="Self.Request" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VidSection" EntityType="Self.VidSection" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="fk_idCategory" Association="Self.fk_idCategory">
             <End Role="CategorySection" EntitySet="CategorySection" />
             <End Role="ImgSection" EntitySet="ImgSection" />
+          </AssociationSet>
+          <AssociationSet Name="fk_idCategoryS" Association="Self.fk_idCategoryS">
+            <End Role="ImageCategory" EntitySet="ImageCategory" />
+            <End Role="PageSection" EntitySet="PageSection" />
           </AssociationSet>
           <AssociationSet Name="fk_IdCatVid" Association="Self.fk_IdCatVid">
             <End Role="CategorySection" EntitySet="CategorySection" />
@@ -326,6 +363,12 @@
             <Parameter Name="pagina" Mode="In" Type="Int32" />
             <Parameter Name="cantRegistros" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="ImageCategory" EntityType="CDIWebSiteModel.ImageCategory" />
+          <EntitySet Name="PageSection" EntityType="CDIWebSiteModel.PageSection" />
+          <AssociationSet Name="fk_idCategoryS" Association="CDIWebSiteModel.fk_idCategoryS">
+            <End Role="ImageCategory" EntitySet="ImageCategory" />
+            <End Role="PageSection" EntitySet="PageSection" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="VidSection">
           <Key>
@@ -361,6 +404,39 @@
           <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="300" />
           <Property Type="String" Name="iFrame" Nullable="true" />
         </ComplexType>
+        <EntityType Name="ImageCategory">
+          <Key>
+            <PropertyRef Name="idCategory" />
+          </Key>
+          <Property Name="idCategory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CatName" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="CatDesc" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Int32" />
+          <NavigationProperty Name="PageSection" Relationship="CDIWebSiteModel.fk_idCategoryS" FromRole="ImageCategory" ToRole="PageSection" />
+        </EntityType>
+        <EntityType Name="PageSection">
+          <Key>
+            <PropertyRef Name="idPS" />
+          </Key>
+          <Property Name="idPS" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCategory" Type="Int32" Nullable="false" />
+          <Property Name="imgSource" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="footerImg" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Int32" />
+          <NavigationProperty Name="ImageCategory" Relationship="CDIWebSiteModel.fk_idCategoryS" FromRole="PageSection" ToRole="ImageCategory" />
+        </EntityType>
+        <Association Name="fk_idCategoryS">
+          <End Type="CDIWebSiteModel.ImageCategory" Role="ImageCategory" Multiplicity="1" />
+          <End Type="CDIWebSiteModel.PageSection" Role="PageSection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ImageCategory">
+              <PropertyRef Name="idCategory" />
+            </Principal>
+            <Dependent Role="PageSection">
+              <PropertyRef Name="idCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -471,6 +547,27 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="ImageCategory">
+            <EntityTypeMapping TypeName="CDIWebSiteModel.ImageCategory">
+              <MappingFragment StoreEntitySet="ImageCategory">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CatDesc" ColumnName="CatDesc" />
+                <ScalarProperty Name="CatName" ColumnName="CatName" />
+                <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PageSection">
+            <EntityTypeMapping TypeName="CDIWebSiteModel.PageSection">
+              <MappingFragment StoreEntitySet="PageSection">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="footerImg" ColumnName="footerImg" />
+                <ScalarProperty Name="imgSource" ColumnName="imgSource" />
+                <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+                <ScalarProperty Name="idPS" ColumnName="idPS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
